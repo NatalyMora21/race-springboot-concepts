@@ -45,8 +45,8 @@ public class Race {
         return race;
     }
 
-    public void addUser(String id, String userName, Integer numberOfWins, Integer lane, String carBrand, int progress){
-        var user = new User(id, userName, numberOfWins, lane, carBrand, progress);
+    public void addUser(String id, String userName, Integer numberOfWins, Integer lane, String carBrand, int progress, String avatar){
+        var user = new User(id, userName, numberOfWins, lane, carBrand, progress, avatar);
         this.users.put(id, user);
     }
 

@@ -43,7 +43,8 @@ public class RaceDocument {
                 user.progress(),
                 user.numberOfWins(),
                 user.lane(),
-                user.carBrand()));
+                user.carBrand(),
+                user.avatar()));
     }
 
     public String getTitle() {

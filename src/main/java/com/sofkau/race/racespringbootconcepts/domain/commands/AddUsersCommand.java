@@ -8,6 +8,15 @@ public class AddUsersCommand implements Serializable {
     private Integer numberOfWins;
     private Integer lane;
     private String carBrand;
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public AddUsersCommand() {
     }

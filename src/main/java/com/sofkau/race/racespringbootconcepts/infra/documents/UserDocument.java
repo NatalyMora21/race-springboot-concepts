@@ -9,6 +9,7 @@ public class UserDocument {
 
     @Id
     private String id;
+    private String avatar;
     private String userName;
     private Integer progress;
     private Integer NumberOfWins;
@@ -18,13 +19,22 @@ public class UserDocument {
     public UserDocument() {
     }
 
-    public UserDocument(String id, String userName, Integer progress, Integer numberOfWins, Integer lane, String carBrand) {
+    public UserDocument(String id, String userName, Integer progress, Integer numberOfWins, Integer lane, String carBrand, String avatar) {
         this.id = id;
+        this.avatar = avatar;
         this.userName = userName;
         this.progress = progress;
         NumberOfWins = numberOfWins;
         this.lane = lane;
         this.carBrand = carBrand;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getId() {
