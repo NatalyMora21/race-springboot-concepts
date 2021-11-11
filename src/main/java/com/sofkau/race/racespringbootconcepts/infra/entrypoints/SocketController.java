@@ -1,7 +1,11 @@
 package com.sofkau.race.racespringbootconcepts.infra.entrypoints;
 
 import co.com.sofka.domain.generic.DomainEvent;
+import co.com.sofka.infraestructure.controller.CommandWrapperSerializer;
 import co.com.sofka.infraestructure.event.EventSerializer;
+import co.com.sofka.infraestructure.handle.CommandWrapper;
+import com.sofkau.race.racespringbootconcepts.domain.Race;
+import com.sofkau.race.racespringbootconcepts.domain.commands.MessageToClient;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
@@ -51,8 +55,9 @@ public class SocketController {
 
     }
 
-    public void send(String correlationId, DomainEvent event) {
-        var message = EventSerializer.instance().serialize(event);
+    public void send(String correlationId, MessageToClient command) {
+
+        var message = CommandWrapperSerializer.instance().serialize(command);
         if (Objects.nonNull(correlationId) && sessions.containsKey(correlationId)) {
             sessions.get(correlationId).values()
                     .forEach(session -> {

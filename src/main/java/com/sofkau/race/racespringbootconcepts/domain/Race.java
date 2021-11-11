@@ -1,6 +1,8 @@
 package com.sofkau.race.racespringbootconcepts.domain;
 
+import com.sofkau.race.racespringbootconcepts.domain.commands.MessageToClient;
 import com.sofkau.race.racespringbootconcepts.domain.factory.RaceBuilder;
+import com.sofkau.race.racespringbootconcepts.infra.entrypoints.SocketController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +58,7 @@ public class Race {
             userIterator.add(key);
         });
         var playing = true;
+        SocketController socket = new SocketController();
         while(playing){
             int newProgress = (int)Math.floor(Math.random() * 6 + 1);
             int userToAdvance = (int)Math.floor(Math.random() * userIterator.size());
@@ -79,7 +82,8 @@ public class Race {
                 System.out.println(e.toString());
             }
             users.put(key, user);
-            System.out.println(this);
+            socket.send(this.id, new MessageToClient(this.id, "Update from backend", this));
+            System.out.println("Esto es this en race: " + this);
         }
 
     }
