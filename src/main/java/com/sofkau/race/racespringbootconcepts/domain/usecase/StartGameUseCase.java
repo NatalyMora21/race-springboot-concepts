@@ -22,10 +22,20 @@ public class StartGameUseCase implements Function<StartGameCommand, Race> {
     @Override
     public Race apply(StartGameCommand command) {
         var race = repository.findById(command.getRaceId());
-        System.out.println(race);
+        if(race.users().size() < 3){
+            System.out.println("Insufficient amount of players");
+            return race;
+        }
+        var playing = true;
+        if(race.state() == false){
+            race.startGame();
+        }
         race.moveRandomUser();
-        //Solo se hace una vez
-        race.startGame();
+
+        if(race.podium().size() >= 3){
+            playing = false;
+        }
+
         return race;
     }
 }

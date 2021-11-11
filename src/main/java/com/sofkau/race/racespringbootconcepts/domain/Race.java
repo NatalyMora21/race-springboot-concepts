@@ -55,15 +55,33 @@ public class Race {
         this.users.forEach((key, user)->{
             userIterator.add(key);
         });
-        int newProgress = (int)Math.floor(Math.random() * 6 + 1);
-        int userToAdvance = (int)Math.floor(Math.random() * userIterator.size());
-        System.out.println("progress: " + newProgress);
-        System.out.println("index of list " + userToAdvance);
-        String key = userIterator.get(userToAdvance);
-        User user = this.users.get(key);
-        System.out.println("User Progress: " + user.progress());
-        user.updateProgress(newProgress);
-        users.put(key, user);
+        var playing = true;
+        while(playing){
+            int newProgress = (int)Math.floor(Math.random() * 6 + 1);
+            int userToAdvance = (int)Math.floor(Math.random() * userIterator.size());
+            System.out.println("progress: " + newProgress);
+            System.out.println("index of list " + userToAdvance);
+            String key = userIterator.get(userToAdvance);
+            User user = this.users.get(key);
+            System.out.println("User Progress: " + user.progress());
+            user.updateProgress(newProgress);
+            if(user.progress() >= this.trackDistance){
+                this.podium.add(user.id());
+                userIterator.remove(userToAdvance);
+            }
+            if(this.podium.size() >= 3){
+                playing = false;
+                this.stopGame();
+            }
+            try{
+                Thread.sleep(3000);
+            }catch(InterruptedException e){
+                System.out.println(e.toString());
+            }
+            users.put(key, user);
+            System.out.println(this);
+        }
+
     }
 
     public void startGame(){
