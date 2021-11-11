@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class RaceController {
+public class RaceCommandController {
 
     private CreateRaceUseCase createRaceUseCase;
 
-    public RaceController(CreateRaceUseCase createRaceUseCase){
+    public RaceCommandController(CreateRaceUseCase createRaceUseCase){
         this.createRaceUseCase = createRaceUseCase;
     }
 
     @PostMapping("/createRace")
     public String create(@RequestBody CreateRaceCommand command){
         var race = createRaceUseCase.apply(command);
-        return race.title();
+        return race.id();
     }
 }

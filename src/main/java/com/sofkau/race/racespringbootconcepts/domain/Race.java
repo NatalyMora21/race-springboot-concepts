@@ -25,6 +25,10 @@ public class Race {
         this.numberOfPlayers = numberOfPlayers;
     }
 
+    public static Race from(){
+
+    }
+
     public void addUser(String id, String userName, Integer numberOfWins, Integer lane, String carBrand){
         var user = new User(id, userName, numberOfWins, lane, carBrand);
         this.users.put(id, user);

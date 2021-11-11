@@ -4,4 +4,6 @@ import com.sofkau.race.racespringbootconcepts.domain.Race;
 
 public interface RaceRepository {
     Race findById (String id);
+
+    Race save(Race race);
 }

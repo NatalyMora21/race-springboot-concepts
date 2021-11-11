@@ -3,7 +3,6 @@ package com.sofkau.race.racespringbootconcepts.domain.commands;
 import com.sofkau.race.racespringbootconcepts.domain.User;
 
 import java.io.Serializable;
-import java.util.Set;
 
 public class CreateRaceCommand implements Serializable {
     private String title;
