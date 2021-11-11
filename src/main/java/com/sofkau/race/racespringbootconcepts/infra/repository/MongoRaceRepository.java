@@ -36,7 +36,8 @@ public class MongoRaceRepository implements RaceRepository {
                         userDocument.getUserName(),
                         userDocument.getNumberOfWins(),
                         userDocument.getLane(),
-                        userDocument.getCarBrand()));
+                        userDocument.getCarBrand(),
+                        userDocument.getProgress()));
             });
         });
         return Race.from(id, builder);

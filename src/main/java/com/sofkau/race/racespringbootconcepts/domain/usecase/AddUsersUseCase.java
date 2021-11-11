@@ -23,7 +23,7 @@ public class AddUsersUseCase implements Function<AddUsersCommand, Race> {
                 command.getUserName(),
                 command.getNumberOfWins(),
                 command.getLane(),
-                command.getCarBrand());
+                command.getCarBrand(), 0);
         return race;
     }
 }

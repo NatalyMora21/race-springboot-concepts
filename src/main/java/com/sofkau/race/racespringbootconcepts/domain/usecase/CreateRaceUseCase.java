@@ -20,7 +20,7 @@ public class CreateRaceUseCase implements Function<CreateRaceCommand, Race> {
     public Race apply(CreateRaceCommand command) {
         var race = new Race(UUID.randomUUID().toString(),
                 command.getTitle(),
-                command.getTrackDistance(),
+                command.getTrackDistance() * 10,
                 command.getNumberOfPlayers());
         return repository.save(race);
     }

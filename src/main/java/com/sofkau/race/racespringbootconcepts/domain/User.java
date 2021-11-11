@@ -8,17 +8,21 @@ public class User {
     private Integer lane;
     private String carBrand;
 
-    public User(String id, String userName, Integer numberOfWins, Integer lane, String carBrand) {
+    public User(String id, String userName, Integer numberOfWins, Integer lane, String carBrand, int progress) {
         this.id = id;
         this.userName = userName;
-        this.progress = 0;
-        NumberOfWins = numberOfWins;
+        this.progress = progress;
+        this.NumberOfWins = numberOfWins;
         this.lane = lane;
         this.carBrand = carBrand;
     }
 
-    public static User from(String id, String userName, Integer numberOfWins, Integer lane, String carBrand){
-        return new User(id, userName, numberOfWins, lane, carBrand);
+    public static User from(String id, String userName, Integer numberOfWins, Integer lane, String carBrand, Integer progress){
+        return new User(id, userName, numberOfWins, lane, carBrand, progress);
+    }
+
+    public void updateProgress(int newProgress){
+        this.progress = this.progress + newProgress;
     }
 
     public String id() {
@@ -43,5 +47,17 @@ public class User {
 
     public String carBrand() {
         return carBrand;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", userName='" + userName + '\'' +
+                ", progress=" + progress +
+                ", NumberOfWins=" + NumberOfWins +
+                ", lane=" + lane +
+                ", carBrand='" + carBrand + '\'' +
+                '}';
     }
 }

@@ -45,9 +45,25 @@ public class Race {
         return race;
     }
 
-    public void addUser(String id, String userName, Integer numberOfWins, Integer lane, String carBrand){
-        var user = new User(id, userName, numberOfWins, lane, carBrand);
+    public void addUser(String id, String userName, Integer numberOfWins, Integer lane, String carBrand, int progress){
+        var user = new User(id, userName, numberOfWins, lane, carBrand, progress);
         this.users.put(id, user);
+    }
+
+    public void moveRandomUser(){
+        List<String> userIterator = new ArrayList<>();
+        this.users.forEach((key, user)->{
+            userIterator.add(key);
+        });
+        int newProgress = (int)Math.floor(Math.random() * 6 + 1);
+        int userToAdvance = (int)Math.floor(Math.random() * userIterator.size());
+        System.out.println("progress: " + newProgress);
+        System.out.println("index of list " + userToAdvance);
+        String key = userIterator.get(userToAdvance);
+        User user = this.users.get(key);
+        System.out.println("User Progress: " + user.progress());
+        user.updateProgress(newProgress);
+        users.put(key, user);
     }
 
     public void startGame(){
@@ -88,5 +104,18 @@ public class Race {
 
     public Integer numberOfPlayers() {
         return numberOfPlayers;
+    }
+
+    @Override
+    public String toString() {
+        return "Race{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", users=" + users +
+                ", trackDistance=" + trackDistance +
+                ", podium=" + podium +
+                ", state=" + state +
+                ", numberOfPlayers=" + numberOfPlayers +
+                '}';
     }
 }
