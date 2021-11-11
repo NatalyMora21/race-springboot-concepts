@@ -1,5 +1,7 @@
 package com.sofkau.race.racespringbootconcepts.domain;
 
+import com.sofkau.race.racespringbootconcepts.domain.factory.RaceBuilder;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +27,22 @@ public class Race {
         this.numberOfPlayers = numberOfPlayers;
     }
 
-    public static Race from(){
+    private Race(String id){
+        this.id = id;
+        this.users = new HashMap<>();
+        this.podium = new ArrayList<>();
+        this.state = false;
+    }
 
+    public static Race from(String id, RaceBuilder raceBuilder){
+        var race = new Race(id);
+        race.title = raceBuilder.getTitle();
+        race.users = raceBuilder.getUsers();
+        race.trackDistance = raceBuilder.getTrackDistance();
+        race.podium = raceBuilder.getPodium();
+        race.state = raceBuilder.isState();
+        race.numberOfPlayers = raceBuilder.getNumberOfPlayers();
+        return race;
     }
 
     public void addUser(String id, String userName, Integer numberOfWins, Integer lane, String carBrand){

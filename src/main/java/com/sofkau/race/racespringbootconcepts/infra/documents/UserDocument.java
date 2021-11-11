@@ -15,6 +15,18 @@ public class UserDocument {
     private Integer lane;
     private String carBrand;
 
+    public UserDocument() {
+    }
+
+    public UserDocument(String id, String userName, Integer progress, Integer numberOfWins, Integer lane, String carBrand) {
+        this.id = id;
+        this.userName = userName;
+        this.progress = progress;
+        NumberOfWins = numberOfWins;
+        this.lane = lane;
+        this.carBrand = carBrand;
+    }
+
     public String getId() {
         return id;
     }

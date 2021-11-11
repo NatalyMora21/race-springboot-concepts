@@ -4,6 +4,8 @@ import com.sofkau.race.racespringbootconcepts.domain.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +23,27 @@ public class RaceDocument {
     private boolean state;
     private Integer numberOfPlayers;
 
+    public RaceDocument() {
+        this.users = new HashMap<>();
+        this.podium = new ArrayList<>();
+        this.state = false;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void withUser(User user){
+        users.put(user.id(), new UserDocument(user.id(),
+                user.userName(),
+                user.progress(),
+                user.numberOfWins(),
+                user.lane(),
+                user.carBrand()));
     }
 
     public String getTitle() {

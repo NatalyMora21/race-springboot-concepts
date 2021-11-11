@@ -17,6 +17,10 @@ public class User {
         this.carBrand = carBrand;
     }
 
+    public static User from(String id, String userName, Integer numberOfWins, Integer lane, String carBrand){
+        return new User(id, userName, numberOfWins, lane, carBrand);
+    }
+
     public String id() {
         return id;
     }
