@@ -82,7 +82,7 @@ public class Race {
                 System.out.println(e.toString());
             }
             users.put(key, user);
-            socket.send(this.id, new MessageToClient(this.id, "Update from backend", this));
+            //socket.send(this.id, new MessageToClient("e73dd538-ab21-401b-aa03-db40d1ae45a9", "Update from backend", this));
             System.out.println("Esto es this en race: " + this);
         }
 
