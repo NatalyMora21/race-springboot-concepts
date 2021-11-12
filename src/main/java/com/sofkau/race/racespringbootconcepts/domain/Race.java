@@ -2,7 +2,9 @@ package com.sofkau.race.racespringbootconcepts.domain;
 
 import com.sofkau.race.racespringbootconcepts.domain.commands.MessageToClient;
 import com.sofkau.race.racespringbootconcepts.domain.factory.RaceBuilder;
+import com.sofkau.race.racespringbootconcepts.domain.usecase.RaceRepository;
 import com.sofkau.race.racespringbootconcepts.infra.entrypoints.SocketController;
+import com.sofkau.race.racespringbootconcepts.infra.repository.MongoRaceRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +20,7 @@ public class Race {
     private List<String> podium;
     private boolean state;
     private Integer numberOfPlayers;
+    private RaceRepository repository = new MongoRaceRepository();
 
     public Race(String id, String title, Integer trackDistance, Integer numberOfPlayers) {
         this.id = id;
@@ -84,6 +87,7 @@ public class Race {
             users.put(key, user);
             //socket.send(this.id, new MessageToClient("e73dd538-ab21-401b-aa03-db40d1ae45a9", "Update from backend", this));
             System.out.println("Esto es this en race: " + this);
+            repository.save(this);
         }
 
     }

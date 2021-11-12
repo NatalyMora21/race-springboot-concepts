@@ -7,6 +7,7 @@ import co.com.sofka.infraestructure.handle.CommandWrapper;
 import com.sofkau.race.racespringbootconcepts.domain.Race;
 import com.sofkau.race.racespringbootconcepts.domain.commands.MessageToClient;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 
 @Component
 @ServerEndpoint("/retrieve/{correlationId}")
+@CrossOrigin(origins = "http://localhost:3000/")
 public class SocketController {
     private static final Logger logger = Logger.getLogger(SocketController.class.getName());
     private static Map<String, Map<String, Session>> sessions;
