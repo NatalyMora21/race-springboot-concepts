@@ -7,11 +7,13 @@ import com.sofkau.race.racespringbootconcepts.domain.commands.StartGameCommand;
 import com.sofkau.race.racespringbootconcepts.domain.dto.CreateRaceWithUsersDto;
 import com.sofkau.race.racespringbootconcepts.domain.usecase.CreateRaceUseCase;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000/")
 public class RaceCommandController {
 
     private final ApplicationEventPublisher eventPublisher;
