@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Race {
     private String id;
@@ -56,39 +57,28 @@ public class Race {
     }
 
     public void moveRandomUser(){
-        List<String> userIterator = new ArrayList<>();
+        List<String> userIteratorFirst = new ArrayList<>();
         this.users.forEach((key, user)->{
-            userIterator.add(key);
+            userIteratorFirst.add(key);
         });
-        var playing = true;
-        SocketController socket = new SocketController();
-        while(playing){
-            int newProgress = (int)Math.floor(Math.random() * 6 + 1);
-            int userToAdvance = (int)Math.floor(Math.random() * userIterator.size());
-            System.out.println("progress: " + newProgress);
-            System.out.println("index of list " + userToAdvance);
-            String key = userIterator.get(userToAdvance);
-            User user = this.users.get(key);
-            System.out.println("User Progress: " + user.progress());
-            user.updateProgress(newProgress);
-            if(user.progress() >= this.trackDistance){
-                this.podium.add(user.id());
-                userIterator.remove(userToAdvance);
-            }
-            if(this.podium.size() >= 3){
-                playing = false;
-                this.stopGame();
-            }
-            try{
-                Thread.sleep(3000);
-            }catch(InterruptedException e){
-                System.out.println(e.toString());
-            }
-            users.put(key, user);
-            //socket.send(this.id, new MessageToClient("e73dd538-ab21-401b-aa03-db40d1ae45a9", "Update from backend", this));
-            System.out.println("Esto es this en race: " + this);
-            repository.save(this);
+        //User iterator filter it with the excetpion of the ones that are int the podium.
+        List<String> userIterator = userIteratorFirst.stream().filter(key -> !this.podium.contains(key)).collect(Collectors.toList());
+        //SocketController socket = new SocketController();
+        int newProgress = (int)Math.floor(Math.random() * 6 + 1);
+        int userToAdvance = (int)Math.floor(Math.random() * userIterator.size());
+        System.out.println("progress: " + newProgress);
+        System.out.println("index of list " + userToAdvance);
+        String key = userIterator.get(userToAdvance);
+        User user = this.users.get(key);
+        System.out.println("User Progress: " + user.progress());
+        user.updateProgress(newProgress);
+        if(user.progress() >= this.trackDistance){
+            this.podium.add(user.id());
+            userIterator.remove(userToAdvance);
         }
+        users.put(key, user);
+        //socket.send(this.id, new MessageToClient("e73dd538-ab21-401b-aa03-db40d1ae45a9", "Update from backend", this));
+        System.out.println("Esto es this en race: " + this);
 
     }
 

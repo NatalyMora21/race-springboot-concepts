@@ -31,6 +31,6 @@ public class StartGameUseCase implements Function<StartGameCommand, Race> {
         }
         race.moveRandomUser();
 
-        return race;
+        return repository.save(race);
     }
 }

@@ -1,8 +1,6 @@
 package com.sofkau.race.racespringbootconcepts.infra.handlers;
 
-import com.sofkau.race.racespringbootconcepts.domain.commands.AddUsersCommand;
 import com.sofkau.race.racespringbootconcepts.domain.commands.StartGameCommand;
-import com.sofkau.race.racespringbootconcepts.domain.usecase.AddUsersUseCase;
 import com.sofkau.race.racespringbootconcepts.domain.usecase.RaceRepository;
 import com.sofkau.race.racespringbootconcepts.domain.usecase.StartGameUseCase;
 import org.springframework.context.event.EventListener;
@@ -21,7 +19,19 @@ public class StartGameUseCaseHandle {
 
     @EventListener
     public void handle(StartGameCommand command){
-        var race = this.startGameUseCase.apply(command);
-        this.repository.save(race);
+
+        //While true
+        var playing = true;
+        while(playing){
+            var race = this.startGameUseCase.apply(command);
+            if(race.podium().size() >= 3){
+                playing = false;
+            }
+            try{
+                Thread.sleep(3000);
+            }catch(InterruptedException e){
+                System.out.println(e.toString());
+            }
+        }
     }
 }
