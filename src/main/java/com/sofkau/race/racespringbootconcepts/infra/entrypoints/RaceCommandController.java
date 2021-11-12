@@ -44,6 +44,15 @@ public class RaceCommandController {
         createRaceCommand.setTrackDistance(Integer.parseInt(createRaceWithUsersDto.getTrackDistance()));
         createRaceCommand.setNumberOfPlayers(createRaceWithUsersDto.getUsers().size());
         var race = createRaceUseCase.apply(createRaceCommand);
+        createRaceWithUsersDto.getUsers().forEach(user ->{
+            addUsersCommand.setRaceId(race.id());
+            addUsersCommand.setUserName(user.getUserName());
+            addUsersCommand.setNumberOfWins(1);
+            addUsersCommand.setLane(2);
+            addUsersCommand.setCarBrand(user.getCarBrand());
+            addUsersCommand.setAvatar(user.getAvatar());
+            this.eventPublisher.publishEvent(addUsersCommand);
+        });
         return race.id();
     }
 
